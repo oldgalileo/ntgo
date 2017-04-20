@@ -6,12 +6,18 @@ const (
 	DefaultAddress string = "0.0.0.0"
 	DefaultPort string = "1735"
 
-	ModeClient mode = 0
-	ModeServer = 1
+	ModeClient mode = iota
+	ModeServer
 )
 
 var (
 	ErrUnknownMode error = errors.New("ntgo: unknown or unsupported network table mode. must be client or server")
+
+	DefaultSettings *NetworkTables = &NetworkTables{
+		Address: DefaultAddress,
+		Port: DefaultPort,
+		Mode: ModeClient,
+	}
 )
 
 type mode int
@@ -29,14 +35,6 @@ type Operator interface {
 	UpdateEntry(message string) error
 	GetEntry(message string)    error
 	Initialize(nt NetworkTables) error
-}
-
-func DefaultSettings() *NetworkTables {
-	return &NetworkTables{
-		Address: DefaultAddress,
-		Port: DefaultPort,
-		Mode: ModeClient,
-	}
 }
 
 func (nt *NetworkTables) Initialize() error {
