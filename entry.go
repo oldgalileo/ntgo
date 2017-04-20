@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/imdario/mergo"
 	"io"
+	"github.com/howardstark/Abreuvoir/entry"
 )
 
 const (
@@ -24,19 +25,10 @@ const (
 	BoolTrue = 0x01
 )
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 var (
+	ErrEntryTypeCastInvalid = errors.New("entry: could not cast entrytype to type")
+	ErrEntryCastInvalid = errors.New("entry: could not cast entryvalue to type")
+	ErrEntryNoSuchType = errors.New("entry: no such type")
 	ErrEntryDataInvalid = errors.New("entry: data invalid")
 	ErrArrayIndexOutOfBounds = errors.New("array: index out of bounds")
 	ErrArrayOutOfSpace = errors.New("array: no more space")
@@ -54,17 +46,75 @@ type EntryFlag byte
 
 type EntryValue interface {
 	GetRaw() []byte
-	UpdateRaw(io.Reader) error
-}
-
-func validateEntryValue() {
-	var _ EntryValue = BuildBoolean(true).Value
-	var _ EntryValue = BuildString("meme").Value
-	var _ EntryValue = BuildRaw([]byte("kek")).Value
 }
 
 type EntryValueArray interface {
-	Get(int) EntryValue
+	Get(uint8) (EntryValue, error)
+	Update(uint8, EntryValue) error
+	Add(EntryValue) error
+	EntryValue
+}
+
+func validateEntryValue() {
+	var bool EntryValue = BuildBoolean(true)
+	var string EntryValue = BuildString("meme")
+	var raw EntryValue = BuildRaw([]byte("kek"))
+	var boolarr EntryValueArray = BuildBooleanArray([]*ValueBoolean{})
+	var doublarr EntryValueArray = BuildDoubleArray([]*ValueDouble{})
+	var stringarr EntryValueArray = BuildStringArray([]*ValueString{})
+	_, _, _, _ ,_ ,_ = bool, string, raw, boolarr, doublarr, stringarr
+}
+
+func DecodeEntryType(r io.Reader) (EntryType, error) {
+	rawType := make([]byte, 1)
+	_, readErr := r.Read(rawType)
+	if readErr != nil {
+		return nil, readErr
+	}
+	return EntryType(rawType[0]), nil
+}
+
+func DecodeEntry(r io.Reader) (EntryValue, error) {
+	entryType := make([]byte, 1)
+	_, readErr := r.Read(entryType)
+	if readErr != nil {
+		return nil, readErr
+	}
+	switch entryType[0] {
+	case TypeBoolean:
+		return DecodeBoolean(r)
+	case TypeDouble:
+		return DecodeDouble(r)
+	case TypeString:
+		return DecodeString(r)
+	case TypeRawData:
+		return DecodeRaw(r)
+	case TypeBooleanArr:
+		return DecodeBooleanArray(r)
+	case TypeDoubleArr:
+		return DecodeDoubleArray(r)
+	case TypeStringArr:
+		return DecodeStringArray(r)
+	}
+}
+
+func DecodeEntryWithType(r io.Reader, entryType EntryType) (EntryValue, error) {
+	switch entryType {
+	case TypeBoolean:
+		return DecodeBoolean(r)
+	case TypeDouble:
+		return DecodeDouble(r)
+	case TypeString:
+		return DecodeString(r)
+	case TypeRawData:
+		return DecodeRaw(r)
+	case TypeBooleanArr:
+		return DecodeBooleanArray(r)
+	case TypeDoubleArr:
+		return DecodeDoubleArray(r)
+	case TypeStringArr:
+		return DecodeStringArray(r)
+	}
 }
 
 type ValueBoolean struct {
@@ -111,6 +161,10 @@ func (entry *ValueBoolean) UpdateRaw(r io.Reader) error {
 	return mergo.MergeWithOverwrite(entry, *newEntry)
 }
 
+func (entry *ValueBoolean) GetRaw() []byte {
+	return entry.RawValue
+}
+
 func (entry *ValueBoolean) UpdateValue(value bool) error {
 	return mergo.MergeWithOverwrite(entry, *BuildBoolean(value))
 }
@@ -150,6 +204,10 @@ func (entry *ValueString) UpdateRaw(r io.Reader) error {
 	return mergo.MergeWithOverwrite(entry, *newEntry)
 }
 
+func (entry *ValueString) GetRaw() []byte {
+	return entry.RawValue
+}
+
 func (entry *ValueString) UpdateValue(value string) error {
 	return mergo.MergeWithOverwrite(entry, *BuildString(value))
 }
@@ -186,6 +244,10 @@ func (entry *ValueDouble) UpdateRaw(r io.Reader) error {
 	return mergo.MergeWithOverwrite(entry, *newEntry)
 }
 
+func (entry *ValueDouble) GetRaw() []byte {
+	return entry.RawValue
+}
+
 func (entry *ValueDouble) UpdateValue(value float64) error {
 	return mergo.MergeWithOverwrite(entry, *BuildDouble(value))
 }
@@ -215,13 +277,16 @@ func BuildRaw(value []byte) *ValueRaw {
 	}
 }
 
-
 func (entry *ValueRaw) UpdateRaw(r io.Reader) error {
 	newEntry, newErr := DecodeRaw(r)
 	if newErr != nil {
 		return newErr
 	}
 	return mergo.MergeWithOverwrite(entry, *newEntry)
+}
+
+func (entry *ValueRaw) GetRaw() []byte {
+	return entry.RawValue
 }
 
 func (entry *ValueRaw) UpdateValue(value []byte) error {
@@ -268,21 +333,29 @@ func BuildBooleanArray(values []*ValueBoolean) *ValueBooleanArray {
 	}
 }
 
-func (array *ValueBooleanArray) Get(index uint8) (*ValueBoolean, error) {
+func (array *ValueBooleanArray) Get(index uint8) (EntryValue, error) {
 	if index > array.index {
 		return nil, ErrArrayIndexOutOfBounds
 	}
 	return array.elements[index], nil
 }
 
-func (array *ValueBooleanArray) Update(index uint8, boolean ValueBoolean) error {
+func (array *ValueBooleanArray) Update(index uint8, entry EntryValue) error {
+	boolean, ok := entry.(*ValueBoolean)
+	if !ok {
+		return ErrEntryCastInvalid
+	}
 	if index > array.index {
 		return ErrArrayIndexOutOfBounds
 	}
-	return mergo.MergeWithOverwrite(array.elements[index], boolean)
+	return mergo.MergeWithOverwrite(array.elements[index], *boolean)
 }
 
-func (array *ValueBooleanArray) Add(boolean *ValueBoolean) error {
+func (array *ValueBooleanArray) Add(entry EntryValue) error {
+	boolean, ok := entry.(*ValueBoolean)
+	if !ok {
+		return ErrEntryCastInvalid
+	}
 	if array.index == 255 {
 		return ErrArrayOutOfSpace
 	}
@@ -290,13 +363,18 @@ func (array *ValueBooleanArray) Add(boolean *ValueBoolean) error {
 	return nil
 }
 
-func (array *ValueBooleanArray) ToBytes() []byte {
-	data := []byte(array.index)
+func (array *ValueBooleanArray) GetRaw() []byte {
+	data := []byte{byte(array.index)}
 	var i uint8 = 0
 	for ; i < array.index; i++ {
 		data = append(data, array.elements[i].RawValue...)
 	}
 	return data
+}
+
+type ValueDoubleArray struct {
+	index uint8
+	elements []*ValueDouble
 }
 
 func DecodeDoubleArray(r io.Reader) (*ValueDoubleArray, error) {
@@ -319,4 +397,135 @@ func DecodeDoubleArray(r io.Reader) (*ValueDoubleArray, error) {
 		index: index,
 		elements: elements,
 	}, nil
+}
+
+func BuildDoubleArray(values []*ValueDouble) *ValueDoubleArray {
+	var index uint8
+	if len(values) > 255 {
+		index = 255
+	} else {
+		index = uint8(len(values))
+	}
+	return &ValueDoubleArray{
+		index: index,
+		elements: values[:index],
+	}
+}
+
+func (array *ValueDoubleArray) Get(index uint8) (EntryValue, error) {
+	if index > array.index {
+		return nil, ErrArrayIndexOutOfBounds
+	}
+	return array.elements[index], nil
+}
+
+func (array *ValueDoubleArray) Update(index uint8, entry EntryValue) error {
+	double, ok := entry.(*ValueDouble)
+	if !ok {
+		return ErrEntryCastInvalid
+	}
+	if index > array.index {
+		return ErrArrayIndexOutOfBounds
+	}
+	return mergo.MergeWithOverwrite(&array.elements[index], double)
+}
+
+func (array *ValueDoubleArray) Add(entry EntryValue) error {
+	double, ok := entry.(*ValueDouble)
+	if !ok {
+		return ErrEntryCastInvalid
+	}
+	if array.index == 255 {
+		return ErrArrayOutOfSpace
+	}
+	array.elements = append(array.elements, double)
+	return nil
+}
+
+func (array *ValueDoubleArray) GetRaw() []byte {
+	data := []byte(array.index)
+	var i uint8 = 0
+	for ; i < array.index; i++ {
+		data = append(data, array.elements[i].RawValue...)
+	}
+	return data
+}
+
+type ValueStringArray struct {
+	index uint8
+	elements []*ValueString
+}
+
+func DecodeStringArray(r io.Reader) (*ValueStringArray, error) {
+	indexData := make([]byte, 1)
+	_, readErr := io.ReadFull(r, indexData)
+	if readErr != nil {
+		return nil, readErr
+	}
+	index := uint8(indexData[0])
+	elements := make([]*ValueString, index)
+	var i uint8 = 0
+	for ; i < index; i++ {
+		string, decodeErr := DecodeString(r)
+		if decodeErr != nil {
+			return nil, decodeErr
+		}
+		elements = append(elements, string)
+	}
+	return &ValueStringArray{
+		index: index,
+		elements: elements,
+	}, nil
+}
+
+func BuildStringArray(values []*ValueString) *ValueStringArray {
+	var index uint8
+	if len(values) > 255 {
+		index = 255
+	} else {
+		index = uint8(len(values))
+	}
+	return &ValueStringArray{
+		index: index,
+		elements: values[:index],
+	}
+}
+
+func (array *ValueStringArray) Get(index uint8) (EntryValue, error) {
+	if index > array.index {
+		return nil, ErrArrayIndexOutOfBounds
+	}
+	return array.elements[index], nil
+}
+
+func (array *ValueStringArray) Update(index uint8, entry EntryValue) error {
+	string, ok := entry.(*ValueString)
+	if !ok {
+		return ErrEntryCastInvalid
+	}
+	if index > array.index {
+		return ErrArrayIndexOutOfBounds
+	}
+	return mergo.MergeWithOverwrite(array.elements[index], *string)
+}
+
+func (array *ValueStringArray) Add(entry EntryValue) error {
+	string, ok := entry.(*ValueString)
+	if !ok {
+		return ErrEntryCastInvalid
+	}
+	if array.index == 255 {
+		return ErrArrayOutOfSpace
+	}
+	array.elements = append(array.elements, string)
+	return nil
+}
+
+func (array *ValueStringArray) GetRaw() []byte {
+	data := []byte(array.index)
+	var i uint8 = 0
+	for ; i < array.index; i++ {
+		data = append(data, array.elements[i].RawValue...)
+	}
+	return data
 }
