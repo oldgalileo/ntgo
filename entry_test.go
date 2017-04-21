@@ -4,7 +4,6 @@ import (
 	"testing"
 	"bytes"
 	"reflect"
-	"fmt"
 )
 
 func TestBuildBoolean(t *testing.T) {
@@ -24,7 +23,6 @@ func TestBuildDouble(t *testing.T) {
 		Value: 0.5,
 		RawValue: Float64ToBytes(0.5),
 	}
-	fmt.Println(expected.RawValue)
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
@@ -74,8 +72,33 @@ func TestBuildDoubleArray(t *testing.T) {
 	}
 }
 
-func TestDecodeEntry(t *testing.T) {
+func TestBuildStringArray(t *testing.T) {
+	result := BuildStringArray([]*ValueString{BuildString("test")})
+	var expected = &ValueStringArray{
+		index: uint8(1),
+		elements: []*ValueString{BuildString("test")},
+	}
+	if !reflect.DeepEqual(result, expected) {
+		t.Fatalf("Expected %s but got %s", expected, result)
+	}
+}
 
+func TestDecodeEntryBoolean(t *testing.T) {
+	entryBytes := []byte{
+		byte(TypeBoolean),
+		BoolTrue,
+	}
+	result, err := DecodeEntry(bytes.NewBuffer(entryBytes))
+	if err != nil {
+		t.Fatal("Unexpected error: ", err)
+	}
+	var expected = &ValueBoolean{
+		Value: true,
+		RawValue: []byte{BoolTrue},
+	}
+	if !reflect.DeepEqual(result, expected) {
+		t.Fatalf("Expected %s but got %s", expected, result)
+	}
 }
 
 func TestDecodeEntryTypeBoolean(t *testing.T) {
