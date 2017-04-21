@@ -63,7 +63,7 @@ func BytesToFloat64(bytes []byte) float64 {
 
 func Float64ToBytes(value float64) []byte {
 	bits := math.Float64bits(value)
-	bytes := []byte{}
-	binary.BigEndian.PutUint64(bytes, bits)
-	return bytes
+	floatBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(floatBytes, bits)
+	return floatBytes
 }

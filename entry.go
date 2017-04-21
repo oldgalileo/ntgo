@@ -4,7 +4,6 @@ import (
 	"errors"
 	"github.com/imdario/mergo"
 	"io"
-	"github.com/howardstark/Abreuvoir/entry"
 )
 
 const (
@@ -16,6 +15,7 @@ const (
 	TypeDoubleArr = 0x11
 	TypeStringArr = 0x12
 	TypeRPCDef = 0x20
+	TypeUndef = 0xFF
 
 	FlagTemporary EntryFlag = 0x00
 	FlagPersistent = 0x01
@@ -55,21 +55,11 @@ type EntryValueArray interface {
 	EntryValue
 }
 
-func validateEntryValue() {
-	var bool EntryValue = BuildBoolean(true)
-	var string EntryValue = BuildString("meme")
-	var raw EntryValue = BuildRaw([]byte("kek"))
-	var boolarr EntryValueArray = BuildBooleanArray([]*ValueBoolean{})
-	var doublarr EntryValueArray = BuildDoubleArray([]*ValueDouble{})
-	var stringarr EntryValueArray = BuildStringArray([]*ValueString{})
-	_, _, _, _ ,_ ,_ = bool, string, raw, boolarr, doublarr, stringarr
-}
-
 func DecodeEntryType(r io.Reader) (EntryType, error) {
 	rawType := make([]byte, 1)
 	_, readErr := r.Read(rawType)
 	if readErr != nil {
-		return nil, readErr
+		return TypeUndef, readErr
 	}
 	return EntryType(rawType[0]), nil
 }
@@ -80,22 +70,7 @@ func DecodeEntry(r io.Reader) (EntryValue, error) {
 	if readErr != nil {
 		return nil, readErr
 	}
-	switch entryType[0] {
-	case TypeBoolean:
-		return DecodeBoolean(r)
-	case TypeDouble:
-		return DecodeDouble(r)
-	case TypeString:
-		return DecodeString(r)
-	case TypeRawData:
-		return DecodeRaw(r)
-	case TypeBooleanArr:
-		return DecodeBooleanArray(r)
-	case TypeDoubleArr:
-		return DecodeDoubleArray(r)
-	case TypeStringArr:
-		return DecodeStringArray(r)
-	}
+	return DecodeEntryWithType(r, EntryType(entryType[0]))
 }
 
 func DecodeEntryWithType(r io.Reader, entryType EntryType) (EntryValue, error) {
@@ -114,6 +89,8 @@ func DecodeEntryWithType(r io.Reader, entryType EntryType) (EntryValue, error) {
 		return DecodeDoubleArray(r)
 	case TypeStringArr:
 		return DecodeStringArray(r)
+	default:
+		return nil, ErrEntryNoSuchType
 	}
 }
 
@@ -443,7 +420,7 @@ func (array *ValueDoubleArray) Add(entry EntryValue) error {
 }
 
 func (array *ValueDoubleArray) GetRaw() []byte {
-	data := []byte(array.index)
+	data := []byte{byte(array.index)}
 	var i uint8 = 0
 	for ; i < array.index; i++ {
 		data = append(data, array.elements[i].RawValue...)
@@ -522,7 +499,7 @@ func (array *ValueStringArray) Add(entry EntryValue) error {
 }
 
 func (array *ValueStringArray) GetRaw() []byte {
-	data := []byte(array.index)
+	data := []byte{byte(array.index)}
 	var i uint8 = 0
 	for ; i < array.index; i++ {
 		data = append(data, array.elements[i].RawValue...)

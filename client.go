@@ -15,10 +15,10 @@ func (cl *client) Initialize(nt NetworkTables) error {
 	return nil
 }
 
-func (cl *client) CreateEntry(message string) error
+func (cl *client) CreateEntry(message string) error { return nil }
 
-func (cl *client) UpdateEntry(message string) error
+func (cl *client) UpdateEntry(message string) error { return nil }
 
-func (cl *client) DeleteEntry(message string) error
+func (cl *client) DeleteEntry(message string) error { return nil }
 
-func (cl *client) GetEntry(message string) error
+func (cl *client) GetEntry(message string) error { return nil }
