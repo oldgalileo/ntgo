@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7516cf54-fcf5-4fd4-a95a-75cecdb6d547" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entry_test.go" afterPath="$PROJECT_DIR$/entry_test.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,12 +27,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="entry_test.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="entry_test.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entry_test.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
               <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="36">
+                <caret line="2" column="117" lean-forward="false" selection-start-line="2" selection-start-column="117" selection-end-line="2" selection-end-column="117" />
+                <folding />
+              </first_editor>
+              <second_editor>
+                <js_state />
+              </second_editor>
             </state>
           </provider>
         </entry>
@@ -109,8 +124,8 @@
       <find>error:</find>
       <find>DecodeDouble</find>
       <find>Err</find>
-      <find>fmt</find>
       <find>ErrEntryDataInvalid</find>
+      <find>fmt</find>
     </findStrings>
     <replaceStrings>
       <replace>ValueString</replace>
@@ -131,13 +146,13 @@
         <option value="$PROJECT_DIR$/networktables.go" />
         <option value="$PROJECT_DIR$/networktables-spec.md" />
         <option value="$PROJECT_DIR$/readme.md.go" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/client.go" />
         <option value="$PROJECT_DIR$/rpc.go" />
         <option value="$PROJECT_DIR$/util.go" />
         <option value="$PROJECT_DIR$/entry.go" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/entry_test.go" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -764,19 +779,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/networktables-spec.md" />
     <entry file="file://$PROJECT_DIR$/readme.md.go" />
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="72">
-            <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rpc.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1980">
@@ -854,6 +856,19 @@
         <state relative-caret-position="108">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="36">
+            <caret line="2" column="117" lean-forward="false" selection-start-line="2" selection-start-column="117" selection-end-line="2" selection-end-column="117" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
         </state>
       </provider>
     </entry>
