@@ -63,10 +63,10 @@ func TestBuildBooleanArray(t *testing.T) {
 }
 
 func TestBuildDoubleArray(t *testing.T) {
-	result := BuildDoubleArray([]*ValueDouble{BuildDouble(12.6)})
+	result := BuildDoubleArray([]*ValueDouble{BuildDouble(49.04)})
 	var expected = &ValueDoubleArray{
 		index: uint8(1),
-		elements: []*ValueDouble{BuildDouble(12.6)},
+		elements: []*ValueDouble{BuildDouble(49.04)},
 	}
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("Expected %s but got %s", expected, result)

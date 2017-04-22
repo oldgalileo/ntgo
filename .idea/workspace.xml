@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7516cf54-fcf5-4fd4-a95a-75cecdb6d547" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entry_test.go" afterPath="$PROJECT_DIR$/entry_test.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,8 +30,8 @@
       <file leaf-file-name="entry_test.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/entry_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="123">
+              <caret line="68" column="58" lean-forward="false" selection-start-line="68" selection-start-column="58" selection-end-line="68" selection-end-column="58" />
               <folding>
                 <element signature="e#14#62#0" expanded="true" />
               </folding>
@@ -139,8 +138,8 @@
         <option value="$PROJECT_DIR$/rpc.go" />
         <option value="$PROJECT_DIR$/util.go" />
         <option value="$PROJECT_DIR$/entry.go" />
-        <option value="$PROJECT_DIR$/entry_test.go" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/entry_test.go" />
       </list>
     </option>
   </component>
@@ -854,8 +853,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/entry_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state relative-caret-position="123">
+          <caret line="68" column="58" lean-forward="false" selection-start-line="68" selection-start-column="58" selection-end-line="68" selection-end-column="58" />
           <folding>
             <element signature="e#14#62#0" expanded="true" />
           </folding>
