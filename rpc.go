@@ -88,27 +88,24 @@ func (rpc *ValueRPC) GetRaw() []byte {
 	return raw
 }
 
-func DecodeRPCParam(r io.Reader) (rpcParam RPCParam, err error) {
-	rpcParam = RPCParam{}
+func DecodeRPCParam(r io.Reader) (RPCParam, error) {
+	rpcParam := RPCParam{}
 	entryType, typeErr := DecodeEntryType(r)
 	if typeErr != nil {
-		err = typeErr
-		return
+		return rpcParam, typeErr
 	}
 	rpcParam.Type = entryType
 	name, nameErr := DecodeString(r)
 	if nameErr != nil {
-		err = nameErr
-		return
+		return rpcParam, nameErr
 	}
 	rpcParam.Name = *name
 	val, valErr := DecodeEntryWithType(r, entryType)
 	if valErr != nil {
-		err = valErr
-		return
+		return rpcParam, valErr
 	}
 	rpcParam.DefaultVal = val
-	return
+	return rpcParam, nil
 }
 
 func (param RPCParam) GetRaw() []byte {

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7516cf54-fcf5-4fd4-a95a-75cecdb6d547" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entry.go" afterPath="$PROJECT_DIR$/entry.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rpc.go" afterPath="$PROJECT_DIR$/rpc.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util.go" afterPath="$PROJECT_DIR$/util.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,14 +24,16 @@
       <file leaf-file-name="entry.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entry.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-4303">
+              <caret line="242" column="35" lean-forward="false" selection-start-line="242" selection-start-column="35" selection-end-line="242" selection-end-column="35" />
+              <folding>
+                <element signature="e#14#68#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="entry_test.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="entry_test.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/entry_test.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="108">
@@ -37,12 +43,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="36">
-                <caret line="2" column="117" lean-forward="false" selection-start-line="2" selection-start-column="117" selection-end-line="2" selection-end-column="117" />
+                <caret line="2" column="115" lean-forward="false" selection-start-line="2" selection-start-column="115" selection-end-line="2" selection-end-column="115" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -55,8 +61,8 @@
       <file leaf-file-name="rpc.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpc.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1980">
-              <caret line="110" column="14" lean-forward="false" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
+            <state relative-caret-position="249">
+              <caret line="93" column="27" lean-forward="true" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
               <folding>
                 <element signature="e#14#25#0" expanded="true" />
               </folding>
@@ -67,10 +73,10 @@
       <file leaf-file-name="util.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="65" column="37" lean-forward="false" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
+            <state relative-caret-position="-204">
+              <caret line="22" column="58" lean-forward="false" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
               <folding>
-                <element signature="e#14#66#0" expanded="true" />
+                <element signature="e#14#76#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,6 +131,7 @@
       <find>DecodeDouble</find>
       <find>Err</find>
       <find>ErrEntryDataInvalid</find>
+      <find>uleb</find>
       <find>fmt</find>
     </findStrings>
     <replaceStrings>
@@ -147,12 +154,12 @@
         <option value="$PROJECT_DIR$/networktables-spec.md" />
         <option value="$PROJECT_DIR$/readme.md.go" />
         <option value="$PROJECT_DIR$/client.go" />
-        <option value="$PROJECT_DIR$/rpc.go" />
-        <option value="$PROJECT_DIR$/util.go" />
-        <option value="$PROJECT_DIR$/entry.go" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/entry_test.go" />
         <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/rpc.go" />
+        <option value="$PROJECT_DIR$/util.go" />
+        <option value="$PROJECT_DIR$/entry.go" />
       </list>
     </option>
   </component>
@@ -349,12 +356,6 @@
     <history-entry file="TestBuildDouble_in_entry_test_go - 2017.04.22 at 11h 24m 08s.xml">
       <configuration name="TestBuildDouble in entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="entry_test_go - 2017.04.22 at 10h 18m 36s.xml">
-      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="entry_test_go - 2017.04.22 at 10h 19m 22s.xml">
-      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="entry_test_go - 2017.04.22 at 10h 29m 27s.xml">
       <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -373,6 +374,12 @@
     <history-entry file="entry_test_go - 2017.04.22 at 11h 33m 41s.xml">
       <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 52m 14s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 57m 07s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -383,7 +390,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23201175" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23201175" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -416,7 +423,7 @@
         <state relative-caret-position="1098">
           <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -446,7 +453,7 @@
         <state relative-caret-position="378">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -465,7 +472,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1062">
           <caret line="59" column="58" lean-forward="false" selection-start-line="59" selection-start-column="58" selection-end-line="59" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -483,7 +492,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
           <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -501,7 +512,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="45" column="1" lean-forward="true" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -510,7 +523,7 @@
         <state relative-caret-position="378">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -547,7 +560,7 @@
         <state relative-caret-position="378">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -573,7 +586,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3960">
           <caret line="224" column="10" lean-forward="false" selection-start-line="224" selection-start-column="10" selection-end-line="224" selection-end-column="10" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -601,7 +616,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -610,7 +627,7 @@
         <state relative-caret-position="546">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -656,7 +673,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -665,7 +684,7 @@
         <state relative-caret-position="546">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -701,7 +720,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -710,7 +731,7 @@
         <state relative-caret-position="546">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -746,7 +767,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -755,7 +778,7 @@
         <state relative-caret-position="546">
           <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
           <folding>
-            <element signature="e#14#66#0" expanded="true" />
+            <element signature="e#14#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -779,16 +802,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/networktables-spec.md" />
     <entry file="file://$PROJECT_DIR$/readme.md.go" />
-    <entry file="file://$PROJECT_DIR$/rpc.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="110" column="14" lean-forward="false" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/networktables-spec.adoc">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -815,16 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="65" column="37" lean-forward="false" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
-          <folding>
-            <element signature="e#14#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -832,14 +835,6 @@
           <folding>
             <element signature="e#14#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -851,24 +846,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/entry_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="36">
-            <caret line="2" column="117" lean-forward="false" selection-start-line="2" selection-start-column="117" selection-end-line="2" selection-end-column="117" />
+            <caret line="2" column="115" lean-forward="false" selection-start-line="2" selection-start-column="115" selection-end-line="2" selection-end-column="115" />
             <folding />
           </first_editor>
           <second_editor>
             <js_state />
           </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="93" column="27" lean-forward="true" selection-start-line="93" selection-start-column="27" selection-end-line="93" selection-end-column="27" />
+          <folding>
+            <element signature="e#14#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="22" column="58" lean-forward="false" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+          <folding>
+            <element signature="e#14#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entry.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4303">
+          <caret line="242" column="35" lean-forward="false" selection-start-line="242" selection-start-column="35" selection-end-line="242" selection-end-column="35" />
+          <folding>
+            <element signature="e#14#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entry_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

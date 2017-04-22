@@ -5,26 +5,31 @@ import (
 	"io"
 	"encoding/binary"
 	"math"
+	"errors"
+)
+
+var (
+	ErrULEBDecodeDataInvalid = errors.New("uleb: could not decode invalid uleb encoding")
 )
 
 // DecodeULEB128 returns the ULEB128-encoded Value.
-func DecodeULEB128(r io.Reader) uint32 {
+func DecodeULEB128(r io.Reader) (uint32, error) {
 	var result uint32 = 0
 	var shift uint32 = 0
 	var currByte = [1]byte{0x80}
 	for currByte[0]&0x80 == 0x80 {
 		_, readErr := io.ReadFull(r, currByte[:])
 		if readErr != nil {
-			panic(readErr)
+			return 0, ErrULEBDecodeDataInvalid
 		}
 		result |= uint32(currByte[0]&0x7f) << shift
 		shift+=7
 	}
-	return result
+	return result, nil
 }
 
 // DecodeSaveULEB128 returns the ULEB128-encoded Value and the ULEB128 data.
-func DecodeAndSaveULEB128(r io.Reader) (uint32, []byte) {
+func DecodeAndSaveULEB128(r io.Reader) (uint32, []byte, error) {
 	data := []byte{}
 	var result uint32 = 0
 	var shift uint32 = 0
@@ -32,13 +37,13 @@ func DecodeAndSaveULEB128(r io.Reader) (uint32, []byte) {
 	for currByte[0]&0x80 == 0x80 {
 		_, readErr := io.ReadFull(r, currByte[:])
 		if readErr != nil {
-			panic(readErr)
+			return 0, data, ErrULEBDecodeDataInvalid
 		}
 		result |= uint32(currByte[0]&0x7f) << shift
 		shift+=7
 		data = append(data, currByte[0])
 	}
-	return result, data
+	return result, data, nil
 }
 
 // Encodes data into ULEB128 Value as a byte array

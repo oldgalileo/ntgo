@@ -152,7 +152,10 @@ type ValueString struct {
 }
 
 func DecodeString(r io.Reader) (*ValueString, error) {
-	uleb, ulebData := DecodeAndSaveULEB128(r)
+	uleb, ulebData, ulebErr := DecodeAndSaveULEB128(r)
+	if ulebErr != nil {
+		return nil, ulebErr
+	}
 	data := make([]byte, uleb)
 	_, readErr := io.ReadFull(r, data)
 	if readErr != nil {
@@ -235,7 +238,10 @@ type ValueRaw struct {
 }
 
 func DecodeRaw(r io.Reader) (*ValueRaw, error) {
-	uleb, ulebData := DecodeAndSaveULEB128(r)
+	uleb, ulebData, ulebErr := DecodeAndSaveULEB128(r)
+	if ulebErr != nil {
+		return nil, ulebErr
+	}
 	data := make([]byte, uleb)
 	_, readErr := io.ReadFull(r, data)
 	if readErr != nil {
