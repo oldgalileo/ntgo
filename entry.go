@@ -20,9 +20,11 @@ const (
 	FlagTemporary EntryFlag = 0x00
 	FlagPersistent = 0x01
 	FlagReserved = 0xFE
+)
 
-	BoolFalse byte = 0x00
-	BoolTrue = 0x01
+const(
+	BoolFalse byte = iota
+	BoolTrue
 )
 
 var (
