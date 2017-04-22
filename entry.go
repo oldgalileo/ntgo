@@ -22,7 +22,7 @@ const (
 	FlagReserved = 0xFE
 )
 
-const(
+const (
 	BoolFalse byte = iota
 	BoolTrue
 )
