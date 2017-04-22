@@ -283,13 +283,12 @@ func DecodeBooleanArray(r io.Reader) (*ValueBooleanArray, error) {
 	}
 	index := uint8(indexData[0])
 	elements := make([]*ValueBoolean, index)
-	var i uint8 = 0
-	for ; i < index; i++ {
+	for i := uint8(0); i < index; i++ {
 		boolean, decodeErr := DecodeBoolean(r)
 		if decodeErr != nil {
 			return nil, decodeErr
 		}
-		elements = append(elements, boolean)
+		elements[i] = boolean
 	}
 	return &ValueBooleanArray{
 		index: index,
@@ -362,13 +361,12 @@ func DecodeDoubleArray(r io.Reader) (*ValueDoubleArray, error) {
 	}
 	index := uint8(indexData[0])
 	elements := make([]*ValueDouble, index)
-	var i uint8 = 0
-	for ; i < index; i++ {
+	for i := uint8(0); i < index; i++ {
 		double, decodeErr := DecodeDouble(r)
 		if decodeErr != nil {
 			return nil, decodeErr
 		}
-		elements = append(elements, double)
+		elements[i] = double
 	}
 	return &ValueDoubleArray{
 		index: index,
@@ -441,13 +439,12 @@ func DecodeStringArray(r io.Reader) (*ValueStringArray, error) {
 	}
 	index := uint8(indexData[0])
 	elements := make([]*ValueString, index)
-	var i uint8 = 0
-	for ; i < index; i++ {
+	for i := uint8(0); i < index; i++ {
 		string, decodeErr := DecodeString(r)
 		if decodeErr != nil {
 			return nil, decodeErr
 		}
-		elements = append(elements, string)
+		elements[i] = string
 	}
 	return &ValueStringArray{
 		index: index,

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7516cf54-fcf5-4fd4-a95a-75cecdb6d547" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entry.go" afterPath="$PROJECT_DIR$/entry.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/entry_test.go" afterPath="$PROJECT_DIR$/entry_test.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,23 +19,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="networktables.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/networktables.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-              <folding>
-                <element signature="e#14#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="entry.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/entry.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3253">
-              <caret line="229" column="1" lean-forward="false" selection-start-line="229" selection-start-column="1" selection-end-line="229" selection-end-column="1" />
+            <state relative-caret-position="813">
+              <caret line="115" column="47" lean-forward="false" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="47" />
               <folding>
                 <element signature="e#14#68#0" expanded="true" />
               </folding>
@@ -44,9 +34,11 @@
       <file leaf-file-name="entry_test.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/entry_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2916">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="157">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding>
+                <element signature="e#14#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,7 +58,7 @@
       <file leaf-file-name="util.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/util.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
+            <state relative-caret-position="348">
               <caret line="65" column="37" lean-forward="false" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
               <folding>
                 <element signature="e#14#66#0" expanded="true" />
@@ -75,14 +67,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="23" column="63" lean-forward="false" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
-              <folding>
-                <element signature="e#14#26#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="networktables-spec.adoc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/networktables-spec.adoc">
+          <provider selected="true" editor-type-id="split-provider[text-editor;AsciiDocPreviewEditor]">
+            <state split_layout="SECOND">
+              <first_editor relative-caret-position="209">
+                <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -103,12 +96,24 @@
       <find>&amp;</find>
       <find>Double</find>
       <find>Boolean</find>
+      <find>0x00,0x00,0x00,0x00,0x00,0x00</find>
+      <find>0x99</find>
+      <find>0x00</find>
+      <find>t.Fatal(&quot;Unexpected error: &quot;,</find>
       <find>fmt</find>
+      <find>error:</find>
+      <find>DecodeDouble</find>
+      <find>Err</find>
+      <find>ErrEntryDataInvalid</find>
     </findStrings>
     <replaceStrings>
       <replace>ValueString</replace>
       <replace>Double</replace>
       <replace>String</replace>
+      <replace>0x00</replace>
+      <replace>0x99</replace>
+      <replace>t.Fatalf(&quot;Unexpected error: %s&quot;,</replace>
+      <replace>error!</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -123,8 +128,8 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/client.go" />
         <option value="$PROJECT_DIR$/rpc.go" />
-        <option value="$PROJECT_DIR$/entry.go" />
         <option value="$PROJECT_DIR$/util.go" />
+        <option value="$PROJECT_DIR$/entry.go" />
         <option value="$PROJECT_DIR$/entry_test.go" />
       </list>
     </option>
@@ -155,8 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -171,6 +174,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -207,15 +212,6 @@
       <filePath value="$PROJECT_DIR$/entry_test.go" />
       <method />
     </configuration>
-    <configuration default="false" name="TestBuildBoolean in entry_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
-      <module name="ntgo" />
-      <working_directory value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/howardstark/ntgo" />
-      <pattern value="^TestBuildBoolean$" />
-      <method />
-    </configuration>
     <configuration default="false" name="TestBuildString in entry_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="ntgo" />
       <working_directory value="$PROJECT_DIR$" />
@@ -241,6 +237,15 @@
       <kind value="PACKAGE" />
       <package value="github.com/howardstark/ntgo" />
       <pattern value="^TestBuildBooleanArray$" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TestBuildDouble in entry_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+      <module name="ntgo" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/howardstark/ntgo" />
+      <pattern value="^TestBuildDouble$" />
       <method />
     </configuration>
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
@@ -297,18 +302,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Go Test.entry_test.go" />
-      <item index="1" class="java.lang.String" itemvalue="Go Test.TestBuildBoolean in entry_test.go" />
-      <item index="2" class="java.lang.String" itemvalue="Go Test.TestBuildString in entry_test.go" />
-      <item index="3" class="java.lang.String" itemvalue="Go Test.TestBuildRaw in entry_test.go" />
-      <item index="4" class="java.lang.String" itemvalue="Go Test.TestBuildBooleanArray in entry_test.go" />
+      <item index="1" class="java.lang.String" itemvalue="Go Test.TestBuildString in entry_test.go" />
+      <item index="2" class="java.lang.String" itemvalue="Go Test.TestBuildRaw in entry_test.go" />
+      <item index="3" class="java.lang.String" itemvalue="Go Test.TestBuildBooleanArray in entry_test.go" />
+      <item index="4" class="java.lang.String" itemvalue="Go Test.TestBuildDouble in entry_test.go" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Go Test.entry_test.go" />
-        <item index="1" class="java.lang.String" itemvalue="Go Test.TestBuildBooleanArray in entry_test.go" />
-        <item index="2" class="java.lang.String" itemvalue="Go Test.TestBuildRaw in entry_test.go" />
-        <item index="3" class="java.lang.String" itemvalue="Go Test.TestBuildString in entry_test.go" />
-        <item index="4" class="java.lang.String" itemvalue="Go Test.TestBuildBoolean in entry_test.go" />
+        <item index="1" class="java.lang.String" itemvalue="Go Test.TestBuildDouble in entry_test.go" />
+        <item index="2" class="java.lang.String" itemvalue="Go Test.TestBuildBooleanArray in entry_test.go" />
+        <item index="3" class="java.lang.String" itemvalue="Go Test.TestBuildRaw in entry_test.go" />
+        <item index="4" class="java.lang.String" itemvalue="Go Test.TestBuildString in entry_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -316,34 +321,34 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestBuildBooleanArray_in_entry_test_go - 2017.04.21 at 18h 26m 58s.xml">
-      <configuration name="TestBuildBooleanArray in entry_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestBuildDouble_in_entry_test_go - 2017.04.22 at 11h 05m 15s.xml">
+      <configuration name="TestBuildDouble in entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestBuildBooleanArray_in_entry_test_go - 2017.04.21 at 18h 35m 49s.xml">
-      <configuration name="TestBuildBooleanArray in entry_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="TestBuildDouble_in_entry_test_go - 2017.04.22 at 11h 24m 08s.xml">
+      <configuration name="TestBuildDouble in entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="TestBuildString_in_entry_test_go - 2017.04.21 at 10h 09m 30s.xml">
-      <configuration name="TestBuildString in entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestBuildString_in_entry_test_go - 2017.04.21 at 10h 19m 07s.xml">
-      <configuration name="TestBuildString in entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestBuildString_in_entry_test_go - 2017.04.21 at 10h 20m 38s.xml">
-      <configuration name="TestBuildString in entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestBuildString_in_entry_test_go - 2017.04.21 at 10h 21m 05s.xml">
-      <configuration name="TestBuildString in entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestBuildString_in_entry_test_go - 2017.04.21 at 10h 22m 19s.xml">
-      <configuration name="TestBuildString in entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestBuildString_in_entry_test_go - 2017.04.21 at 10h 22m 53s.xml">
-      <configuration name="TestBuildString in entry_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="entry_test_go - 2017.04.21 at 18h 35m 52s.xml">
+    <history-entry file="entry_test_go - 2017.04.22 at 10h 18m 36s.xml">
       <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="entry_test_go - 2017.04.21 at 18h 36m 13s.xml">
+    <history-entry file="entry_test_go - 2017.04.22 at 10h 19m 22s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 10h 29m 27s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 24m 15s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 24m 46s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 28m 33s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 33m 34s.xml">
+      <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="entry_test_go - 2017.04.22 at 11h 33m 41s.xml">
       <configuration name="entry_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
@@ -351,16 +356,16 @@
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22374798" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.226979" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23201175" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39941263" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -379,7 +384,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -777,21 +782,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/networktables-spec.md" />
-    <entry file="file://$PROJECT_DIR$/networktables-spec.adoc">
-      <provider selected="true" editor-type-id="split-provider[text-editor;AsciiDocPreviewEditor]">
-        <state split_layout="SECOND">
-          <first_editor relative-caret-position="209">
-            <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="79" lean-forward="true" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md.go" />
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
@@ -803,6 +793,42 @@
           <second_editor>
             <js_state />
           </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="110" column="14" lean-forward="false" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
+          <folding>
+            <element signature="e#14#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networktables-spec.adoc">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="79" lean-forward="true" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;AsciiDocPreviewEditor]">
+        <state split_layout="SECOND">
+          <first_editor relative-caret-position="209">
+            <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/networktables.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+          <folding>
+            <element signature="e#14#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -818,7 +844,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/util.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
+        <state relative-caret-position="348">
           <caret line="65" column="37" lean-forward="false" selection-start-line="65" selection-start-column="37" selection-end-line="65" selection-end-column="37" />
           <folding>
             <element signature="e#14#66#0" expanded="true" />
@@ -826,30 +852,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rpc.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="110" column="14" lean-forward="false" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/networktables.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="32" column="14" lean-forward="false" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/entry.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3253">
-          <caret line="229" column="1" lean-forward="false" selection-start-line="229" selection-start-column="1" selection-end-line="229" selection-end-column="1" />
+        <state relative-caret-position="813">
+          <caret line="115" column="47" lean-forward="false" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="47" />
           <folding>
             <element signature="e#14#68#0" expanded="true" />
           </folding>
@@ -858,9 +864,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/entry_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2916">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="157">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#14#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
