@@ -4,7 +4,6 @@ import (
 	"testing"
 	"bytes"
 	"reflect"
-	"fmt"
 )
 
 func TestBuildBoolean(t *testing.T) {
