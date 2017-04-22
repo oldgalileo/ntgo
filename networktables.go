@@ -5,7 +5,9 @@ import "errors"
 const (
 	DefaultAddress string = "0.0.0.0"
 	DefaultPort string = "1735"
+)
 
+const (
 	ModeClient mode = iota
 	ModeServer
 )
