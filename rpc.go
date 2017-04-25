@@ -2,9 +2,15 @@ package ntgo
 
 import "io"
 
+const (
+	// RPCDefVersion should always be set to 1 according to the
+	// protocol specification.
+	RPCDefVersion byte = 0x01
+)
+
 type ValueRPC struct {
 	DefVersion byte
-	ProcedureName ValueString
+	ProcedureName *ValueString
 	ParamSize uint8
 	Params []RPCParam
 	OutputSize uint8
@@ -13,13 +19,13 @@ type ValueRPC struct {
 
 type RPCParam struct {
 	Type EntryType
-	Name ValueString
+	Name *ValueString
 	DefaultVal EntryValue
 }
 
 type RPCOutput struct {
 	Type EntryType
-	Name ValueString
+	Name *ValueString
 }
 
 func DecodeRPC(r io.Reader) (*ValueRPC, error) {
@@ -62,7 +68,7 @@ func DecodeRPC(r io.Reader) (*ValueRPC, error) {
 	}
 	return &ValueRPC{
 		DefVersion: versionRaw[0],
-		ProcedureName: *procName,
+		ProcedureName: procName,
 		ParamSize: paramSize,
 		Params: params,
 		OutputSize: outputSize,
@@ -99,8 +105,8 @@ func DecodeRPCParam(r io.Reader) (RPCParam, error) {
 	if nameErr != nil {
 		return rpcParam, nameErr
 	}
-	rpcParam.Name = *name
-	val, valErr := DecodeEntryWithType(r, entryType)
+	rpcParam.Name = name
+	val, valErr := DecodeEntryValue(r, entryType)
 	if valErr != nil {
 		return rpcParam, valErr
 	}
@@ -126,7 +132,7 @@ func DecodeRPCOutput(r io.Reader) (RPCOutput, error) {
 	if nameErr != nil {
 		return output, nameErr
 	}
-	output.Name = *name
+	output.Name = name
 	return output, nil
 }
 

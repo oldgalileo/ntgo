@@ -17,9 +17,10 @@ const (
 	TypeRPCDef = 0x20
 	TypeUndef = 0xFF
 
-	FlagTemporary EntryFlag = 0x00
-	FlagPersistent = 0x01
-	FlagReserved = 0xFE
+	FlagEntryTemporary  EntryFlag = 0x00
+	FlagEntryPersistent           = 0x01
+	FlagEntryReserved             = 0xFE
+	FlagEntryUndef                = 0xFF
 )
 
 const (
@@ -29,22 +30,28 @@ const (
 
 var (
 	ErrEntryTypeCastInvalid = errors.New("entry: could not cast entrytype to type")
+
 	ErrEntryCastInvalid = errors.New("entry: could not cast entryvalue to type")
 	ErrEntryNoSuchType = errors.New("entry: no such type")
 	ErrEntryDataInvalid = errors.New("entry: data invalid")
-	ErrArrayIndexOutOfBounds = errors.New("array: index out of bounds")
-	ErrArrayOutOfSpace = errors.New("array: no more space")
+
+	ErrArrayIndexOutOfBounds = errors.New("entryarray: index out of bounds")
+	ErrArrayOutOfSpace = errors.New("entryarray: no more space")
+
+	ErrEntryFlagNoSuchType = errors.New("entryflag: no such flag")
 )
 
 type EntryType byte
+type EntryFlag byte
 
 type Entry struct {
-	Name ValueString
+	Name *ValueString
 	Type EntryType
+	ID [2]byte
+	Sequence [2]byte
+	Flags EntryFlag
 	Value EntryValue
 }
-
-type EntryFlag byte
 
 type EntryValue interface {
 	GetRaw() []byte
@@ -57,6 +64,24 @@ type EntryValueArray interface {
 	EntryValue
 }
 
+func DecodeEntryFlag(r io.Reader) (EntryFlag, error) {
+	flagRaw := make([]byte, 1)
+	_, flagErr := r.Read(flagRaw)
+	if flagErr != nil {
+		return FlagEntryUndef, flagErr
+	}
+	switch EntryFlag(flagRaw[0]) {
+	case FlagEntryPersistent:
+		return FlagEntryPersistent, nil
+	case FlagEntryTemporary:
+		return FlagEntryTemporary, nil
+	case FlagEntryReserved:
+		return FlagEntryReserved, nil
+	default:
+		return FlagEntryUndef, ErrEntryFlagNoSuchType
+	}
+}
+
 func DecodeEntryType(r io.Reader) (EntryType, error) {
 	rawType := make([]byte, 1)
 	_, readErr := r.Read(rawType)
@@ -66,16 +91,18 @@ func DecodeEntryType(r io.Reader) (EntryType, error) {
 	return EntryType(rawType[0]), nil
 }
 
-func DecodeEntry(r io.Reader) (EntryValue, error) {
-	entryType := make([]byte, 1)
-	_, readErr := r.Read(entryType)
+func DecodeEntryValueAndType(r io.Reader) (value EntryValue, entryType EntryType, err error) {
+	entryTypeRaw := make([]byte, 1)
+	_, readErr := r.Read(entryTypeRaw)
 	if readErr != nil {
-		return nil, readErr
+		return nil, TypeUndef, readErr
 	}
-	return DecodeEntryWithType(r, EntryType(entryType[0]))
+	entryType = EntryType(entryTypeRaw[0])
+	value, err = DecodeEntryValue(r, entryType)
+	return
 }
 
-func DecodeEntryWithType(r io.Reader, entryType EntryType) (EntryValue, error) {
+func DecodeEntryValue(r io.Reader, entryType EntryType) (EntryValue, error) {
 	switch entryType {
 	case TypeBoolean:
 		return DecodeBoolean(r)
