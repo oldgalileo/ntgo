@@ -28,6 +28,7 @@ const (
 )
 
 var (
+	ErrMessageNoSuchType = errors.New("message: no such message type")
 	ErrMessageFlagNoSuchType = errors.New("messageflag: no such flag")
 )
 
@@ -42,6 +43,44 @@ type ProtocolRevision [2]byte
 type Message struct {
 	Type MessageType
 	Data MessageData
+}
+
+func DecodeMessage(r io.Reader) (*Message, error) {
+	messageType, typeErr := DecodeMessageType(r)
+	if typeErr != nil {
+		return nil, typeErr
+	}
+	message := &Message{
+		Type: messageType,
+	}
+	var messageData MessageData
+	var dataErr error = nil
+	switch messageType {
+	case TypeKeepAlive:
+		messageData = &MessageDataKeepAlive{}
+	case TypeClientHello:
+		messageData, dataErr = DecodeDataClientHello(r)
+	case TypeProtocVersionUnsupported:
+		messageData, dataErr = DecodeDataProtocVersionUnsupported(r)
+	case TypeServerHelloComplete:
+		messageData = &MessageDataServerHelloComplete{}
+	case TypeServerHello:
+		messageData, dataErr = DecodeDataServerHello(r)
+	case TypeClientHelloComplete:
+		messageData = &MessageDataClientHelloComplete{}
+	case TypeEntryAssignment:
+		messageData, dataErr = DecodeDataEntryAssignment(r)
+	case TypeEntryUpdate:
+		messageData, dataErr = DecodeDataEntryUpdate(r)
+	case TypeEntryFlagsUpdate:
+		messageData, dataErr = DecodeDataEntryFlagsUpdate(r)
+	case TypeClearAll:
+		messageData, dataErr = DecodeDataClearAll(r)
+	default:
+		dataErr = ErrMessageNoSuchType
+	}
+	message.Data = messageData
+	return message, dataErr
 }
 
 type MessageFlag byte
@@ -63,6 +102,15 @@ func DecodeMessageFlag(r io.Reader) (MessageFlag, error) {
 }
 
 type MessageType byte
+
+func DecodeMessageType(r io.Reader) (MessageType, error) {
+	typeRaw := make([]byte, 1)
+	_, typeErr := r.Read(typeRaw)
+	if typeErr != nil {
+		return TypeUndef, typeErr
+	}
+	return MessageType(typeRaw[0]), nil
+}
 
 type MessageData interface {}
 
