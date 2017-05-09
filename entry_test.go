@@ -53,7 +53,6 @@ func TestBuildRaw(t *testing.T) {
 func TestBuildBooleanArray(t *testing.T) {
 	result := BuildBooleanArray([]*ValueBoolean{BuildBoolean(true)})
 	var expected = &ValueBooleanArray{
-		index: uint8(1),
 		elements: []*ValueBoolean{BuildBoolean(true)},
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -64,7 +63,6 @@ func TestBuildBooleanArray(t *testing.T) {
 func TestBuildDoubleArray(t *testing.T) {
 	result := BuildDoubleArray([]*ValueDouble{BuildDouble(49.04)})
 	var expected = &ValueDoubleArray{
-		index: uint8(1),
 		elements: []*ValueDouble{BuildDouble(49.04)},
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -75,7 +73,6 @@ func TestBuildDoubleArray(t *testing.T) {
 func TestBuildStringArray(t *testing.T) {
 	result := BuildStringArray([]*ValueString{BuildString("str")})
 	var expected = &ValueStringArray{
-		index: uint8(1),
 		elements: []*ValueString{BuildString("str")},
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -135,13 +132,44 @@ func TestDecodeEntryValueBooleanArray(t *testing.T) {
 		t.Fatalf("Unexpected error! %s", err)
 	}
 	var expected = &ValueBooleanArray{
-		index: uint8(1),
 		elements: []*ValueBoolean{
 			BuildBoolean(true),
 		},
 	}
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("Expected %s but got %s", expected, result)
+	}
+}
+
+func TestEntryValueBooleanArrayGetSafe(t *testing.T) {
+	var testEntry = &ValueBoolean{
+		Value: true,
+		RawValue: []byte{BoolTrue},
+	}
+	array := BuildBooleanArray([]*ValueBoolean{
+		BuildBoolean(true), BuildBoolean(false),
+		BuildBoolean(false), testEntry,
+	})
+	entry, err := array.Get(3)
+	if err != nil {
+		t.Fatalf("Unexpected error! %s", err)
+	}
+	if !reflect.DeepEqual(entry, testEntry) {
+		t.Fatalf("Expected %s but got %s", testEntry, entry)
+	}
+}
+
+func TestEntryValueBooleanArrayGetFail(t *testing.T) {
+	array := BuildBooleanArray([]*ValueBoolean{
+		BuildBoolean(true), BuildBoolean(false),
+		BuildBoolean(false), BuildBoolean(false),
+	})
+	_, err := array.Get(4)
+	if err == nil {
+		t.Fatal("Expected error but received nil")
+	}
+	if err != ErrArrayIndexOutOfBounds {
+		t.Fatalf("Expected error \"%s\" but received \"%s\"", ErrArrayIndexOutOfBounds, err)
 	}
 }
 
@@ -152,13 +180,41 @@ func TestDecodeEntryValueDoubleArray(t *testing.T) {
 		t.Fatalf("Unexpected error! %s", err)
 	}
 	var expected = &ValueDoubleArray{
-		index: uint8(1),
 		elements: []*ValueDouble{
 			BuildDouble(1.18),
 		},
 	}
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("Expected %s but got %s", expected, result)
+	}
+}
+
+func TestEntryValueDoubleArrayGetSafe(t *testing.T) {
+	var testEntry = BuildDouble(0.3)
+	array := BuildDoubleArray([]*ValueDouble{
+		BuildDouble(0.0), BuildDouble(0.1),
+		BuildDouble(0.2), testEntry,
+	})
+	entry, err := array.Get(3)
+	if err != nil {
+		t.Fatalf("Unexpected error! %s", err)
+	}
+	if !reflect.DeepEqual(entry, testEntry) {
+		t.Fatalf("Expected %s but got %s", testEntry, entry)
+	}
+}
+
+func TestEntryValueDoubleArrayGetFail(t *testing.T) {
+	array := BuildDoubleArray([]*ValueDouble{
+		BuildDouble(0.0), BuildDouble(0.1),
+		BuildDouble(0.2), BuildDouble(0.3),
+	})
+	_, err := array.Get(4)
+	if err == nil {
+		t.Fatal("Expected error but received nil")
+	}
+	if err != ErrArrayIndexOutOfBounds {
+		t.Fatalf("Expected error \"%s\" but received \"%s\"", ErrArrayIndexOutOfBounds, err)
 	}
 }
 
@@ -169,13 +225,41 @@ func TestDecodeEntryValueStringArray(t *testing.T) {
 		t.Fatalf("Unexpected error! %s", err)
 	}
 	var expected = &ValueStringArray{
-		index: uint8(1),
 		elements: []*ValueString{
 			BuildString("array"),
 		},
 	}
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("Expected %s but got %s", expected, result)
+	}
+}
+
+func TestEntryValueStringArrayGetSafe(t *testing.T) {
+	var testEntry = BuildString("test3")
+	array := BuildStringArray([]*ValueString{
+		BuildString("test0"), BuildString("test1"),
+		BuildString("test2"), testEntry,
+	})
+	entry, err := array.Get(3)
+	if err != nil {
+		t.Fatalf("Unexpected error! %s", err)
+	}
+	if !reflect.DeepEqual(entry, testEntry) {
+		t.Fatalf("Expected %s but got %s", testEntry, entry)
+	}
+}
+
+func TestEntryValueStringArrayGetFail(t *testing.T) {
+	array := BuildStringArray([]*ValueString{
+		BuildString("test0"), BuildString("test1"),
+		BuildString("test2"), BuildString("test3"),
+	})
+	_, err := array.Get(4)
+	if err == nil {
+		t.Fatal("Expected error but received nil")
+	}
+	if err != ErrArrayIndexOutOfBounds {
+		t.Fatalf("Expected error \"%s\" but received \"%s\"", ErrArrayIndexOutOfBounds, err)
 	}
 }
 

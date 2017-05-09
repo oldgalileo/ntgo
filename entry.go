@@ -306,7 +306,6 @@ func (entry *ValueRaw) UpdateValue(value []byte) error {
 }
 
 type ValueBooleanArray struct {
-	index uint8
 	elements []*ValueBoolean
 }
 
@@ -326,7 +325,6 @@ func DecodeBooleanArray(r io.Reader) (*ValueBooleanArray, error) {
 		elements[i] = boolean
 	}
 	return &ValueBooleanArray{
-		index: index,
 		elements: elements,
 	}, nil
 }
@@ -339,13 +337,12 @@ func BuildBooleanArray(values []*ValueBoolean) *ValueBooleanArray {
 		index = uint8(len(values))
 	}
 	return &ValueBooleanArray{
-		index: index,
 		elements: values[:index],
 	}
 }
 
 func (array *ValueBooleanArray) Get(index uint8) (EntryValue, error) {
-	if index > array.index {
+	if index >= uint8(len(array.elements)) {
 		return nil, ErrArrayIndexOutOfBounds
 	}
 	return array.elements[index], nil
@@ -356,7 +353,7 @@ func (array *ValueBooleanArray) Update(index uint8, entry EntryValue) error {
 	if !ok {
 		return ErrEntryCastInvalid
 	}
-	if index > array.index {
+	if index >= uint8(len(array.elements)) {
 		return ErrArrayIndexOutOfBounds
 	}
 	return mergo.MergeWithOverwrite(array.elements[index], *boolean)
@@ -367,7 +364,7 @@ func (array *ValueBooleanArray) Add(entry EntryValue) error {
 	if !ok {
 		return ErrEntryCastInvalid
 	}
-	if array.index == 255 {
+	if len(array.elements) > 255 {
 		return ErrArrayOutOfSpace
 	}
 	array.elements = append(array.elements, boolean)
@@ -375,16 +372,15 @@ func (array *ValueBooleanArray) Add(entry EntryValue) error {
 }
 
 func (array *ValueBooleanArray) GetRaw() []byte {
-	data := []byte{byte(array.index)}
+	data := []byte{byte(uint8(len(array.elements)))}
 	var i uint8 = 0
-	for ; i < array.index; i++ {
+	for ; i < uint8(len(array.elements)); i++ {
 		data = append(data, array.elements[i].RawValue...)
 	}
 	return data
 }
 
 type ValueDoubleArray struct {
-	index uint8
 	elements []*ValueDouble
 }
 
@@ -404,7 +400,6 @@ func DecodeDoubleArray(r io.Reader) (*ValueDoubleArray, error) {
 		elements[i] = double
 	}
 	return &ValueDoubleArray{
-		index: index,
 		elements: elements,
 	}, nil
 }
@@ -417,13 +412,12 @@ func BuildDoubleArray(values []*ValueDouble) *ValueDoubleArray {
 		index = uint8(len(values))
 	}
 	return &ValueDoubleArray{
-		index: index,
 		elements: values[:index],
 	}
 }
 
 func (array *ValueDoubleArray) Get(index uint8) (EntryValue, error) {
-	if index > array.index {
+	if index >= uint8(len(array.elements)) {
 		return nil, ErrArrayIndexOutOfBounds
 	}
 	return array.elements[index], nil
@@ -434,7 +428,7 @@ func (array *ValueDoubleArray) Update(index uint8, entry EntryValue) error {
 	if !ok {
 		return ErrEntryCastInvalid
 	}
-	if index > array.index {
+	if index >= uint8(len(array.elements)) {
 		return ErrArrayIndexOutOfBounds
 	}
 	return mergo.MergeWithOverwrite(&array.elements[index], double)
@@ -445,7 +439,7 @@ func (array *ValueDoubleArray) Add(entry EntryValue) error {
 	if !ok {
 		return ErrEntryCastInvalid
 	}
-	if array.index == 255 {
+	if len(array.elements) > 255 {
 		return ErrArrayOutOfSpace
 	}
 	array.elements = append(array.elements, double)
@@ -453,16 +447,15 @@ func (array *ValueDoubleArray) Add(entry EntryValue) error {
 }
 
 func (array *ValueDoubleArray) GetRaw() []byte {
-	data := []byte{byte(array.index)}
+	data := []byte{byte(uint8(len(array.elements)))}
 	var i uint8 = 0
-	for ; i < array.index; i++ {
+	for ; i < uint8(len(array.elements)); i++ {
 		data = append(data, array.elements[i].RawValue...)
 	}
 	return data
 }
 
 type ValueStringArray struct {
-	index uint8
 	elements []*ValueString
 }
 
@@ -482,7 +475,6 @@ func DecodeStringArray(r io.Reader) (*ValueStringArray, error) {
 		elements[i] = string
 	}
 	return &ValueStringArray{
-		index: index,
 		elements: elements,
 	}, nil
 }
@@ -495,13 +487,12 @@ func BuildStringArray(values []*ValueString) *ValueStringArray {
 		index = uint8(len(values))
 	}
 	return &ValueStringArray{
-		index: index,
 		elements: values[:index],
 	}
 }
 
 func (array *ValueStringArray) Get(index uint8) (EntryValue, error) {
-	if index > array.index {
+	if index >= uint8(len(array.elements)) {
 		return nil, ErrArrayIndexOutOfBounds
 	}
 	return array.elements[index], nil
@@ -512,7 +503,7 @@ func (array *ValueStringArray) Update(index uint8, entry EntryValue) error {
 	if !ok {
 		return ErrEntryCastInvalid
 	}
-	if index > array.index {
+	if index >= uint8(len(array.elements)) {
 		return ErrArrayIndexOutOfBounds
 	}
 	return mergo.MergeWithOverwrite(array.elements[index], *string)
@@ -523,7 +514,7 @@ func (array *ValueStringArray) Add(entry EntryValue) error {
 	if !ok {
 		return ErrEntryCastInvalid
 	}
-	if array.index == 255 {
+	if len(array.elements) > 255 {
 		return ErrArrayOutOfSpace
 	}
 	array.elements = append(array.elements, string)
@@ -531,9 +522,9 @@ func (array *ValueStringArray) Add(entry EntryValue) error {
 }
 
 func (array *ValueStringArray) GetRaw() []byte {
-	data := []byte{byte(array.index)}
+	data := []byte{byte(uint8(len(array.elements)))}
 	var i uint8 = 0
-	for ; i < array.index; i++ {
+	for ; i < uint8(len(array.elements)); i++ {
 		data = append(data, array.elements[i].RawValue...)
 	}
 	return data
