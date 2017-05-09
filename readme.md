@@ -4,6 +4,8 @@ NTGO
 
 An implementation of the FRC key-value store networking protocol "NetworkTables". NTGo is aiming for full NetworkTables 3.0 compliance. As of right now, there is no plan for 2.0 backwards compatibility (the protocol is itself backwards compatible but NTGo will currently reject any 2.0 client).
 
+To see the specification this project is implementing, head over to the [NetworkTables Spec](networktables-spec.adoc).
+
 ## Roadmap
 
 ### Done
