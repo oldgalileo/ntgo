@@ -9,7 +9,7 @@ import (
 func TestBuildBoolean(t *testing.T) {
 	result := BuildBoolean(true)
 	var expected = &ValueBoolean{
-		Value: true,
+		Value:    true,
 		RawValue: []byte{BoolTrue},
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -20,8 +20,8 @@ func TestBuildBoolean(t *testing.T) {
 func TestBuildDouble(t *testing.T) {
 	result := BuildDouble(0.8)
 	var expected = &ValueDouble{
-		Value: 0.8,
-		RawValue: []byte{0x3f,0xe9,0x99,0x99,0x99,0x99,0x99,0x9a}, // Value of float64(0.8)
+		Value:    0.8,
+		RawValue: []byte{0x3f, 0xe9, 0x99, 0x99, 0x99, 0x99, 0x99, 0x9a}, // Value of float64(0.8)
 	}
 	if !reflect.DeepEqual(result, expected) {
 		t.Fatalf("Expected %s but got %s", expected, result)
@@ -31,7 +31,7 @@ func TestBuildDouble(t *testing.T) {
 func TestBuildString(t *testing.T) {
 	result := BuildString("test")
 	var expected = &ValueString{
-		Value: "test",
+		Value:    "test",
 		RawValue: []byte{0x04, 0x74, 0x65, 0x73, 0x74}, // Value of "test"
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -42,7 +42,7 @@ func TestBuildString(t *testing.T) {
 func TestBuildRaw(t *testing.T) {
 	result := BuildRaw([]byte{0x50, 0x21})
 	var expected = &ValueRaw{
-		Value: []byte{0x50, 0x21},
+		Value:    []byte{0x50, 0x21},
 		RawValue: []byte{0x02, 0x50, 0x21}, // Meaningless Value
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -81,13 +81,13 @@ func TestBuildStringArray(t *testing.T) {
 }
 
 func TestDecodeEntryValueBoolean(t *testing.T) {
-	entryBytes := []byte{byte(TypeBoolean),BoolFalse}
+	entryBytes := []byte{byte(EntryTypeBoolean), BoolFalse}
 	result, _, err := DecodeEntryValueAndType(bytes.NewBuffer(entryBytes))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
 	var expected = &ValueBoolean{
-		Value: false,
+		Value:    false,
 		RawValue: []byte{BoolFalse},
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -96,13 +96,13 @@ func TestDecodeEntryValueBoolean(t *testing.T) {
 }
 
 func TestDecodeEntryValueString(t *testing.T) {
-	entryBytes := []byte{byte(TypeString),0x05,0x6f,0x74,0x68,0x65,0x72} // Value of other
+	entryBytes := []byte{byte(EntryTypeString), 0x05, 0x6f, 0x74, 0x68, 0x65, 0x72} // Value of other
 	result, _, err := DecodeEntryValueAndType(bytes.NewBuffer(entryBytes))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
 	var expected = &ValueString{
-		Value: "other",
+		Value:    "other",
 		RawValue: entryBytes[1:],
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -111,13 +111,13 @@ func TestDecodeEntryValueString(t *testing.T) {
 }
 
 func TestDecodeEntryValueDouble(t *testing.T) {
-	entryBytes := []byte{byte(TypeDouble),0x3f,0xe0,0x00,0x00,0x00,0x00,0x00,0x00}
+	entryBytes := []byte{byte(EntryTypeDouble), 0x3f, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 	result, _, err := DecodeEntryValueAndType(bytes.NewBuffer(entryBytes))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
 	var expected = &ValueDouble{
-		Value: 0.5,
+		Value:    0.5,
 		RawValue: entryBytes[1:],
 	}
 	if !reflect.DeepEqual(result, expected) {
@@ -126,7 +126,7 @@ func TestDecodeEntryValueDouble(t *testing.T) {
 }
 
 func TestDecodeEntryValueBooleanArray(t *testing.T) {
-	entryBytes := []byte{byte(TypeBooleanArr),byte(uint8(1)),0x01}
+	entryBytes := []byte{byte(EntryTypeBooleanArr), byte(uint8(1)), 0x01}
 	result, _, err := DecodeEntryValueAndType(bytes.NewBuffer(entryBytes))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
@@ -143,7 +143,7 @@ func TestDecodeEntryValueBooleanArray(t *testing.T) {
 
 func TestEntryValueBooleanArrayGetSafe(t *testing.T) {
 	var testEntry = &ValueBoolean{
-		Value: true,
+		Value:    true,
 		RawValue: []byte{BoolTrue},
 	}
 	array := BuildBooleanArray([]*ValueBoolean{
@@ -174,7 +174,7 @@ func TestEntryValueBooleanArrayGetFail(t *testing.T) {
 }
 
 func TestDecodeEntryValueDoubleArray(t *testing.T) {
-	entryBytes := []byte{byte(TypeDoubleArr),byte(uint8(1)),0x3f,0xf2,0xe1,0x47,0xae,0x14,0x7a,0xe1}
+	entryBytes := []byte{byte(EntryTypeDoubleArr), byte(uint8(1)), 0x3f, 0xf2, 0xe1, 0x47, 0xae, 0x14, 0x7a, 0xe1}
 	result, _, err := DecodeEntryValueAndType(bytes.NewBuffer(entryBytes))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
@@ -219,7 +219,7 @@ func TestEntryValueDoubleArrayGetFail(t *testing.T) {
 }
 
 func TestDecodeEntryValueStringArray(t *testing.T) {
-	entryBytes := []byte{byte(TypeStringArr), byte(uint8(1)),0x05,0x61,0x72,0x72,0x61,0x79}
+	entryBytes := []byte{byte(EntryTypeStringArr), byte(uint8(1)), 0x05, 0x61, 0x72, 0x72, 0x61, 0x79}
 	result, _, err := DecodeEntryValueAndType(bytes.NewBuffer(entryBytes))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
@@ -264,81 +264,81 @@ func TestEntryValueStringArrayGetFail(t *testing.T) {
 }
 
 func TestDecodeEntryTypeBoolean(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeBoolean)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeBoolean)}))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeBoolean
+	var expected EntryType = EntryTypeBoolean
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
 }
 
 func TestDecodeEntryTypeDouble(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeDouble)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeDouble)}))
 
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeDouble
+	var expected EntryType = EntryTypeDouble
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
 }
 
 func TestDecodeEntryTypeString(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeString)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeString)}))
 
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeString
+	var expected EntryType = EntryTypeString
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
 }
 
 func TestDecodeEntryTypeRawData(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeRawData)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeRawData)}))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeRawData
+	var expected EntryType = EntryTypeRawData
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
 }
 
 func TestDecodeEntryTypeBooleanArray(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeBooleanArr)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeBooleanArr)}))
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeBooleanArr
+	var expected EntryType = EntryTypeBooleanArr
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
 }
 
 func TestDecodeEntryTypeDoubleArray(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeDoubleArr)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeDoubleArr)}))
 
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeDoubleArr
+	var expected EntryType = EntryTypeDoubleArr
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}
 }
 
 func TestDecodeEntryTypeStringArray(t *testing.T) {
-	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(TypeStringArr)}))
+	result, err := DecodeEntryType(bytes.NewBuffer([]byte{byte(EntryTypeStringArr)}))
 
 	if err != nil {
 		t.Fatalf("Unexpected error! %s", err)
 	}
-	var expected EntryType = TypeStringArr
+	var expected EntryType = EntryTypeStringArr
 	if result != expected {
 		t.Fatalf("Expected %s but got %s", expected, result)
 	}

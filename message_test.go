@@ -15,7 +15,7 @@ func TestDecodeDataClientHello(t *testing.T) {
 	var expected = &MessageDataClientHello{
 		ProtocVersion: [2]byte{0x03, 0x00},
 		Identity: &ValueString{
-			Value: "ntgo",
+			Value:    "ntgo",
 			RawValue: []byte{0x04, 0x6e, 0x74, 0x67, 0x6F},
 		},
 	}
@@ -47,7 +47,7 @@ func TestDecodeDataServerHello(t *testing.T) {
 	var expected = &MessageDataServerHello{
 		Flags: FlagMessageClientNew,
 		Identity: &ValueString{
-			Value: "ntgo",
+			Value:    "ntgo",
 			RawValue: []byte{0x04, 0x6e, 0x74, 0x67, 0x6F},
 		},
 	}
@@ -57,12 +57,12 @@ func TestDecodeDataServerHello(t *testing.T) {
 }
 
 func TestDecodeDataEntryAssignment(t *testing.T) {
-	messageBytes := []byte{0x05, 0x65,0x6e,0x74,0x72,0x79, // Entry Name ("entry")
-		byte(TypeBoolean), // Entry Type
-		0x50, 0x21, // Unique ID
-		0x00, 0x01, // Sequential ID
-		byte(FlagEntryTemporary), // Flags
-		byte(BoolTrue), // Value
+	messageBytes := []byte{0x05, 0x65, 0x6e, 0x74, 0x72, 0x79, // Entry Name ("entry")
+			       byte(EntryTypeBoolean),             // Entry Type
+			       0x50, 0x21,                         // Unique ID
+			       0x00, 0x01,                         // Sequential ID
+			       byte(EntryFlagTemporary),           // Flags
+			       byte(BoolTrue),                     // Value
 	}
 	result, err := DecodeDataEntryAssignment(bytes.NewBuffer(messageBytes))
 	if err != nil {
@@ -71,15 +71,15 @@ func TestDecodeDataEntryAssignment(t *testing.T) {
 	var expected = &MessageDataEntryAssignment{
 		Entry: &Entry{
 			Name: &ValueString{
-				Value: "entry",
-				RawValue:  []byte{0x05, 0x65,0x6e,0x74,0x72,0x79},
+				Value:    "entry",
+				RawValue: []byte{0x05, 0x65, 0x6e, 0x74, 0x72, 0x79},
 			},
-			Type: TypeBoolean,
-			ID: [2]byte{0x50, 0x21},
+			Type:     EntryTypeBoolean,
+			ID:       [2]byte{0x50, 0x21},
 			Sequence: [2]byte{0x00, 0x01},
-			Flags: FlagEntryTemporary,
+			Flags:    EntryFlagTemporary,
 			Value: &ValueBoolean{
-				Value: true,
+				Value:    true,
 				RawValue: []byte{byte(BoolTrue)},
 			},
 		},
@@ -91,10 +91,10 @@ func TestDecodeDataEntryAssignment(t *testing.T) {
 
 func TestDecodeDataEntryUpdate(t *testing.T) {
 	messageBytes := []byte{
-		0x50, 0x21, // ID
-		0x00, 0x01, // Sequential ID
-		byte(TypeBoolean), // Entry Type
-		byte(BoolFalse), // Value
+		0x50, 0x21,             // ID
+		0x00, 0x01,             // Sequential ID
+		byte(EntryTypeBoolean), // Entry Type
+		byte(BoolFalse),        // Value
 	}
 	result, err := DecodeDataEntryUpdate(bytes.NewBuffer(messageBytes))
 	if err != nil {
@@ -102,11 +102,11 @@ func TestDecodeDataEntryUpdate(t *testing.T) {
 	}
 	var expected = &MessageDataEntryUpdate{
 		Entry: &Entry{
-			ID: [2]byte{0x50, 0x21},
+			ID:       [2]byte{0x50, 0x21},
 			Sequence: [2]byte{0x00, 0x01},
-			Type: TypeBoolean,
+			Type:     EntryTypeBoolean,
 			Value: &ValueBoolean{
-				Value: false,
+				Value:    false,
 				RawValue: []byte{byte(BoolFalse)},
 			},
 		},
@@ -119,7 +119,7 @@ func TestDecodeDataEntryUpdate(t *testing.T) {
 func TestDecodeDataEntryFlagsUpdate(t *testing.T) {
 	messageBytes := []byte{
 		0x50, 0x21,
-		byte(FlagEntryPersistent),
+		byte(EntryFlagPersistent),
 	}
 	result, err := DecodeDataEntryFlagsUpdate(bytes.NewBuffer(messageBytes))
 	if err != nil {
@@ -127,8 +127,8 @@ func TestDecodeDataEntryFlagsUpdate(t *testing.T) {
 	}
 	var expected = &MessageDataEntryFlagsUpdate{
 		Entry: &Entry{
-			ID: [2]byte{0x50, 0x21},
-			Flags: FlagEntryPersistent,
+			ID:    [2]byte{0x50, 0x21},
+			Flags: EntryFlagPersistent,
 		},
 	}
 	if !reflect.DeepEqual(expected, result) {

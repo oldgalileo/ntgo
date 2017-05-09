@@ -4,7 +4,7 @@ import "errors"
 
 const (
 	DefaultAddress string = "0.0.0.0"
-	DefaultPort string = "1735"
+	DefaultPort    string = "1735"
 )
 
 const (
@@ -17,8 +17,8 @@ var (
 
 	DefaultSettings *NetworkTables = &NetworkTables{
 		Address: DefaultAddress,
-		Port: DefaultPort,
-		Mode: ModeClient,
+		Port:    DefaultPort,
+		Mode:    ModeClient,
 	}
 )
 
@@ -26,16 +26,16 @@ type mode int
 
 type NetworkTables struct {
 	Address string
-	Port string
-	Mode mode
+	Port    string
+	Mode    mode
 	Operator
 }
 
 type Operator interface {
-	CreateEntry(message string) error
-	DeleteEntry(message string) error
-	UpdateEntry(message string) error
-	GetEntry(message string)    error
+	CreateEntry(entry Entry) error
+	DeleteEntry(entry Entry) error
+	UpdateEntry(entry Entry) error
+	GetEntry(id [2]byte) error
 	Initialize(nt NetworkTables) error
 }
 

@@ -7,20 +7,20 @@ import (
 )
 
 const (
-	TypeBoolean EntryType = 0x00
-	TypeDouble = 0x01
-	TypeString = 0x02
-	TypeRawData  = 0x03
-	TypeBooleanArr = 0x10
-	TypeDoubleArr = 0x11
-	TypeStringArr = 0x12
-	TypeRPCDef = 0x20
-	TypeUndef = 0xFF
+	EntryTypeBoolean    EntryType = 0x00
+	EntryTypeDouble               = 0x01
+	EntryTypeString               = 0x02
+	EntryTypeRawData              = 0x03
+	EntryTypeBooleanArr           = 0x10
+	EntryTypeDoubleArr            = 0x11
+	EntryTypeStringArr            = 0x12
+	EntryTypeRPCDef               = 0x20
+	EntryTypeUndef                = 0xFF
 
-	FlagEntryTemporary  EntryFlag = 0x00
-	FlagEntryPersistent           = 0x01
-	FlagEntryReserved             = 0xFE
-	FlagEntryUndef                = 0xFF
+	EntryFlagTemporary  EntryFlag = 0x00
+	EntryFlagPersistent           = 0x01
+	EntryFlagReserved             = 0xFE
+	EntryFlagUndef                = 0xFF
 )
 
 const (
@@ -32,11 +32,11 @@ var (
 	ErrEntryTypeCastInvalid = errors.New("entry: could not cast entrytype to type")
 
 	ErrEntryCastInvalid = errors.New("entry: could not cast entryvalue to type")
-	ErrEntryNoSuchType = errors.New("entry: no such type")
+	ErrEntryNoSuchType  = errors.New("entry: no such type")
 	ErrEntryDataInvalid = errors.New("entry: data invalid")
 
 	ErrArrayIndexOutOfBounds = errors.New("entryarray: index out of bounds")
-	ErrArrayOutOfSpace = errors.New("entryarray: no more space")
+	ErrArrayOutOfSpace       = errors.New("entryarray: no more space")
 
 	ErrEntryFlagNoSuchType = errors.New("entryflag: no such flag")
 )
@@ -45,12 +45,12 @@ type EntryType byte
 type EntryFlag byte
 
 type Entry struct {
-	Name *ValueString
-	Type EntryType
-	ID [2]byte
+	Name     *ValueString
+	Type     EntryType
+	ID       [2]byte
 	Sequence [2]byte
-	Flags EntryFlag
-	Value EntryValue
+	Flags    EntryFlag
+	Value    EntryValue
 }
 
 type EntryValue interface {
@@ -68,17 +68,17 @@ func DecodeEntryFlag(r io.Reader) (EntryFlag, error) {
 	flagRaw := make([]byte, 1)
 	_, flagErr := r.Read(flagRaw)
 	if flagErr != nil {
-		return FlagEntryUndef, flagErr
+		return EntryFlagUndef, flagErr
 	}
 	switch EntryFlag(flagRaw[0]) {
-	case FlagEntryPersistent:
-		return FlagEntryPersistent, nil
-	case FlagEntryTemporary:
-		return FlagEntryTemporary, nil
-	case FlagEntryReserved:
-		return FlagEntryReserved, nil
+	case EntryFlagPersistent:
+		return EntryFlagPersistent, nil
+	case EntryFlagTemporary:
+		return EntryFlagTemporary, nil
+	case EntryFlagReserved:
+		return EntryFlagReserved, nil
 	default:
-		return FlagEntryUndef, ErrEntryFlagNoSuchType
+		return EntryFlagUndef, ErrEntryFlagNoSuchType
 	}
 }
 
@@ -86,7 +86,7 @@ func DecodeEntryType(r io.Reader) (EntryType, error) {
 	rawType := make([]byte, 1)
 	_, readErr := r.Read(rawType)
 	if readErr != nil {
-		return TypeUndef, readErr
+		return EntryTypeUndef, readErr
 	}
 	return EntryType(rawType[0]), nil
 }
@@ -95,7 +95,7 @@ func DecodeEntryValueAndType(r io.Reader) (value EntryValue, entryType EntryType
 	entryTypeRaw := make([]byte, 1)
 	_, readErr := r.Read(entryTypeRaw)
 	if readErr != nil {
-		return nil, TypeUndef, readErr
+		return nil, EntryTypeUndef, readErr
 	}
 	entryType = EntryType(entryTypeRaw[0])
 	value, err = DecodeEntryValue(r, entryType)
@@ -104,19 +104,19 @@ func DecodeEntryValueAndType(r io.Reader) (value EntryValue, entryType EntryType
 
 func DecodeEntryValue(r io.Reader, entryType EntryType) (EntryValue, error) {
 	switch entryType {
-	case TypeBoolean:
+	case EntryTypeBoolean:
 		return DecodeBoolean(r)
-	case TypeDouble:
+	case EntryTypeDouble:
 		return DecodeDouble(r)
-	case TypeString:
+	case EntryTypeString:
 		return DecodeString(r)
-	case TypeRawData:
+	case EntryTypeRawData:
 		return DecodeRaw(r)
-	case TypeBooleanArr:
+	case EntryTypeBooleanArr:
 		return DecodeBooleanArray(r)
-	case TypeDoubleArr:
+	case EntryTypeDoubleArr:
 		return DecodeDoubleArray(r)
-	case TypeStringArr:
+	case EntryTypeStringArr:
 		return DecodeStringArray(r)
 	default:
 		return nil, ErrEntryNoSuchType
@@ -154,7 +154,7 @@ func BuildBoolean(value bool) *ValueBoolean {
 		rawValue = []byte{BoolFalse}
 	}
 	return &ValueBoolean{
-		Value: value,
+		Value:    value,
 		RawValue: rawValue,
 	}
 }
@@ -191,7 +191,7 @@ func DecodeString(r io.Reader) (*ValueString, error) {
 		return nil, readErr
 	}
 	return &ValueString{
-		Value: string(data),
+		Value:    string(data),
 		RawValue: append(ulebData, data...),
 	}, nil
 }
@@ -200,7 +200,7 @@ func BuildString(value string) *ValueString {
 	stringBytes := []byte(value)
 	rawValue := append(EncodeULEB128(uint32(len(stringBytes))), stringBytes...)
 	return &ValueString{
-		Value: value,
+		Value:    value,
 		RawValue: rawValue,
 	}
 }
@@ -233,14 +233,14 @@ func DecodeDouble(r io.Reader) (*ValueDouble, error) {
 		return nil, readErr
 	}
 	return &ValueDouble{
-		Value: BytesToFloat64(data),
+		Value:    BytesToFloat64(data),
 		RawValue: data,
 	}, nil
 }
 
 func BuildDouble(value float64) *ValueDouble {
 	return &ValueDouble{
-		Value: value,
+		Value:    value,
 		RawValue: Float64ToBytes(value),
 	}
 }
@@ -262,7 +262,7 @@ func (entry *ValueDouble) UpdateValue(value float64) error {
 }
 
 type ValueRaw struct {
-	Value []byte
+	Value    []byte
 	RawValue []byte
 }
 
@@ -277,14 +277,14 @@ func DecodeRaw(r io.Reader) (*ValueRaw, error) {
 		return nil, readErr
 	}
 	return &ValueRaw{
-		Value: data,
+		Value:    data,
 		RawValue: append(ulebData, data...),
 	}, nil
 }
 
 func BuildRaw(value []byte) *ValueRaw {
 	return &ValueRaw{
-		Value: value,
+		Value:    value,
 		RawValue: append(EncodeULEB128(uint32(len(value))), value...),
 	}
 }
