@@ -70,13 +70,10 @@ func DecodeEntryFlag(r io.Reader) (EntryFlag, error) {
 	if flagErr != nil {
 		return EntryFlagUndef, flagErr
 	}
-	switch EntryFlag(flagRaw[0]) {
-	case EntryFlagPersistent:
-		return EntryFlagPersistent, nil
-	case EntryFlagTemporary:
-		return EntryFlagTemporary, nil
-	case EntryFlagReserved:
-		return EntryFlagReserved, nil
+	flag := EntryFlag(flagRaw[0])
+	switch flag {
+	case EntryFlagPersistent, EntryFlagTemporary, EntryFlagReserved:
+		return flag, nil
 	default:
 		return EntryFlagUndef, ErrEntryFlagNoSuchType
 	}
